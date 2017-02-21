@@ -1,0 +1,12 @@
+= Asciidoctor themed PDF example
+
+An example project that demonstrates how to convert AsciiDoc to PDF using Asciidoctor PDF with the Asciidoctor Gradle plugin.
+
+== Usage
+
+Convert the AsciiDoc to PDF using Asciidoctor PDF by invoking the `asciidoctor` task (configured as the default task):
+
+ $ ./gradlew
+
+This example is based on https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-pdf-with-theme-example[this maven example].
+
