@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
+        classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.0'
+    }
+}
+
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.3'
+}
+
+apply plugin: 'java'
+apply plugin: 'org.asciidoctor.convert'
+
+asciidoctorj {
+    version = '1.5.4'
+}
+
+asciidoctor {
+    backends 'pdf', 'html5'
+    requires 'asciidoctor-diagram'
+    attributes \
+        'pdf-stylesdir': 'theme',
+        'pdf-style': 'presentation',
+        'sourcedir': project.sourceSets.main.java.srcDirs[0]
+}
+
+defaultTasks 'asciidoctor'

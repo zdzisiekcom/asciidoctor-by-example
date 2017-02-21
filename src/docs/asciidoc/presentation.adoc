@@ -1,0 +1,353 @@
+﻿= Dlaczego nie pisać dokumentacji w wordzie
+Mateusz Sobczak <mateusz.sobczak@efigence.com>
+v1.0, 2017-01-01
+ifndef::imagesdir[:imagesdir: images]
+:title-logo-image: image:wjug.png[pdfwidth=6cm,align=center]
+:icons: font
+:author-homepage: zdzisiek.com
+:experimental:
+
+== Dlaczego nie lubię worda
+
+* bo jest wordem
+* trzeba klikać
+* za każdym razem formatować od nowa
+
+==== dlaczego nie lubię wiki?
+
+* bo trzeba tam wejść i klikać
+
+
+<<<
+== Co to jest asciidoctor
+
+- [x] prawie jak wiki
+- [x] implementacja asciidoc
+- [x] podobne do markdowna
+- [ ] trzeba klikać 
+- [ ] trzeba męczyć sie z formatowaniem
+
+<<<
+== Jak zrobić pierwszy dokument?
+
+Bardzo dobre przykłady są na stronie: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference
+
+----
+= My Document's Title
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2014-01-01
+:toc:
+:toc-title: Spis treści
+:toclevels: 4
+:sectnums:
+
+Dokument zawiera dokumentację techniczną aplikacji...
+----
+
+<<<
+[[przydatne]]
+== Elementy przydatne przy dokumentacji
+
+**b**old le**tt**ers  *_bold italic phrase_*
+
+Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
+
+Press the btn:[OK] button when you are finished.
+
+TIP: Pro tip...
+
+IMPORTANT: Don't forget...
+
+WARNING: Watch out for...
+
+CAUTION: Ensure that...
+
+[cols="2", options="header"]
+|===
+|Skrót
+|Definicja
+
+|kbd:[F11]
+|Toggle fullscreen
+
+|kbd:[Ctrl+T]
+|Open a new tab
+|===
+
+image::kbd.png[Skróty..., 382, 58]
+
+<<<
+== Elementy przydatne przy dokumentacji
+
+----
+**b**old le**tt**ers  *_bold italic phrase_*
+Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
+Press the btn:[OK] button when you are finished.
+
+TIP: Pro tip...
+IMPORTANT: Don't forget...
+WARNING: Watch out for...
+CAUTION: Ensure that...
+
+[cols="2", options="header"]
+|===
+|Shortcut |Purpose
+
+|kbd:[F11]
+|Toggle fullscreen
+
+|kbd:[Ctrl+T]
+|Open a new tab
+|===
+----
+
+<<<
+== Elementy przydatne przy kodzie
+
+[source,java]
+----
+public class HelloWorld { <1>
+   public static void main(String[] args) {
+      // Prints "Hello, World" in the terminal window.
+      System.out.println("Hello, World"); <2>
+   }
+}
+----
+
+<1> tutaj można nadać jakąś nazwę klasie
+<2> tutaj można coś wypisać na ekranie
+
+----
+public class HelloWorld { \<1>
+...
+
+<1> tutaj można ...
+----
+
+można też dać link do rozdziału "<<przydatne>>" można też nazwać go <<przydatne,inaczej>>.
+
+----
+można też dać link do rozdziału "<<przydatne>>" można też nazwać go <<przydatne,inaczej>>.
+----
+
+
+<<<
+== gradle & maven
+
+=== tak. działa.
+
+----
+asciidoctor {
+    backends 'pdf'
+    requires 'asciidoctor-diagram'
+    attributes \
+        'pdf-stylesdir': 'theme',
+        'pdf-style': 'presentation',
+        'sourcedir': project.sourceSets.main.java.srcDirs[0]
+}
+
+----
+
+
+<<<
+== Diagramy i inne obrazki
+
+[ditaa,basic-module-diagram,png]
+....
+
+  /---------------------------------------------------\    +----------------+
+  |c0AF                                               |    |{d} c6FF        |
+  |                        app                        |    |     Server     |
+  |                                                   |    |      API       |
+  \---------------------------------------------------/    |                |
+        |        |      |            |           |         +----------------+
+        V        |      V            v           v                 ^
+  /------------\ | /---------\  /---------\  /--------\            |
+  |c0A0        | | |c0A0     |  |c0A0     |  |c0A0    |            |
+  |  screens   |-+>|  compo  |->|   dto   |<-|  core  |            |
+  |            | | |  nents  |  |         |  |        |            |
+  \------------/ | \---------/  \---------/  \--------/            |
+        |        |    |                          |                 |
+        |        v    |                          v                 |
+  /------------------------------\  /-----------------\            |
+  |                   :          |  |c737             |            |
+  | c737      Base One:Lib       |<-|  communication  |------------+
+  |                   :          |  |                 |
+  \------------------------------/  \-----------------/
+                      |
+                      v
+....
+
+
+<<<
+== Diagramy i inne obrazki
+
+----
+
+  /---------------------------------------------------\    +----------------+
+  |c0AF                                               |    |{d} c6FF        |
+  |                        app                        |    |     Server     |
+  |                                                   |    |      API       |
+  \---------------------------------------------------/    |                |
+        |        |      |            |           |         +----------------+
+        V        |      V            v           v                 ^
+  /------------\ | /---------\  /---------\  /--------\            |
+  |c0A0        | | |c0A0     |  |c0A0     |  |c0A0    |            |
+  |  screens   |-+>|  compo  |->|   dto   |<-|  core  |            |
+  |            | | |  nents  |  |         |  |        |            |
+  \------------/ | \---------/  \---------/  \--------/            |
+        |        |    |                          |                 |
+        |        v    |                          v                 |
+  /------------------------------\  /-----------------\            |
+  |                   :          |  |c737             |            |
+  | c737      Base One:Lib       |<-|  communication  |------------+
+  |                   :          |  |                 |
+  \------------------------------/  \-----------------/
+                      |
+                      v
+----
+
+
+<<<
+== Diagramy i inne obrazki
+
+[plantuml,settings,png,width=400,align=center]
+....
+
+interface UI {
+ + showError()
+}
+
+class SettingsModule {
+}
+
+class SettingsModulePresenter
+interface SettingsModulePresenter.SettingsModuleUi {
+ + navigateToSettings()
+ + navigateToAppInfo()
+ + navigateToUserSettings()
+}
+
+class _SettingsModuleActivity << generated >> {
+}
+
+SettingsModulePresenter.SettingsModuleUi <|-- SettingsModule
+UI <|-- SettingsModulePresenter.SettingsModuleUi
+SettingsModule *-- SettingsModulePresenter
+SettingsModulePresenter --> SettingsModulePresenter.SettingsModuleUi
+SettingsModule -- _SettingsModuleActivity
+....
+
+<<<
+== Diagramy i inne obrazki
+
+----
+[plantuml,settings,png,width=400,align=center] <1>
+....
+interface UI {
+ + showError()
+}
+
+class SettingsModule {}
+
+class SettingsModulePresenter
+interface SettingsModulePresenter.SettingsModuleUi{}
+
+SettingsModulePresenter.SettingsModuleUi <|-- SettingsModule
+UI <|-- SettingsModulePresenter.SettingsModuleUi
+SettingsModule *-- SettingsModulePresenter
+SettingsModulePresenter --> SettingsModulePresenter.SettingsModuleUi
+SettingsModule -- _SettingsModuleActivity
+....
+----
+
+<1> powered by http://plantuml.com/[PlantUML] ;-)
+
+<<<
+== Diagramy i inne obrazki
+
+[plantuml,user-diagram,png,width=400,align=center]
+....
+actor User
+User -> caller : sendRequest
+caller -> server : conReq
+hnote over caller : idle
+caller <- server : conConf
+rnote over server
+ "r" as rectangle
+ "h" as hexagon
+endrnote
+....
+
+<<<
+== Diagramy i inne obrazki
+
+----
+[plantuml,user-diagram,png,width=400,align=center]
+....
+actor User
+User -> caller : sendRequest
+caller -> server : conReq
+hnote over caller : idle
+caller <- server : conConf
+rnote over server
+ "r" as rectangle
+ "h" as hexagon
+endrnote
+....
+----
+
+<<<
+== Narzędzia do edycji
+
+Dostępne jest całkiem sporo narzędzi:
+
+=== vim
+
+==== pluginy do przeglądarek
+
+==== pluginy do środowiska
+
+==== pluginy do redmine-a, GitHub-a
+
+==== AsciiDocFX
+
+I inne - pełna lista narzędzi pod adresem
+http://asciidoctor.org/docs/editing-asciidoc-with-live-preview/
+
+<<<
+== Rozszerzenia
+
+==== diagramy
+
+==== screenshot-y
+
+==== prezentacje (deck.js, reveal.js)
+
+==== BDD (Cukedoctor, Gherkin)
+
+==== jQassistant
+
+<<<
+== Na koniec można to wszystko ostylować
+
+----
+title_page:
+  align: left
+page:
+  layout: portrait
+  margin: [0.75in, 1in, 0.75in, 1in]
+  size: A4
+base:
+  font_color: #333333
+  line_height_length: 17
+  line_height: $base_line_height_length / $base_font_size
+vertical_rhythm: $base_line_height_length
+heading:
+  font_color: #FF8000
+  font_size: 17
+  font_style: bold
+  line_height: 1.2
+  margin_bottom: $vertical_rhythm
+----
+
